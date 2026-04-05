@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>EV Helper — помощник по зарядке электромобилей в Вологде</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f5f9ff 0%, #eef2fa 100%);
+            color: #1a2c3e;
+            line-height: 1.4;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* header / hero */
+        .hero {
+            padding: 60px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: #2b7a4b20;
+            backdrop-filter: blur(4px);
+            color: #1e6b3e;
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 6px 14px;
+            border-radius: 40px;
+            margin-bottom: 24px;
+            border: 1px solid #2b7a4b40;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1A5F3A, #0F2C3F);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            color: #2c4b66;
+            max-width: 580px;
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+
+        .cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            background: white;
+            color: #1f3b4c;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            border: 1px solid #dce5f0;
+        }
+
+        .btn-primary {
+            background: #1e6b3e;
+            border: none;
+            color: white;
+            box-shadow: 0 8px 18px rgba(30,107,62,0.25);
+        }
+
+        .btn-primary i {
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0f5432;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(30,107,62,0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #b9cee6;
+            backdrop-filter: blur(2px);
+        }
+
+        .btn-outline:hover {
+            background: #ffffffcc;
+            border-color: #1e6b3e;
+            transform: translateY(-2px);
+        }
+
+        .btn-vk {
+            background: #2787F5;
+            border: none;
+            color: white;
+        }
+
+        .btn-vk:hover {
+            background: #1c6bc2;
+            transform: translateY(-2px);
+        }
+
+        .btn-tg {
+            background: #26A5E4;
+            border: none;
+            color: white;
+        }
+
+        .btn-tg:hover {
+            background: #1c8ac2;
+        }
+
+        /* фичи */
+        .features {
+            padding: 40px 0 60px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 48px;
+            color: #0e2a3b;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 36px;
+            padding: 28px 24px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            border: 1px solid #ffffffaa;
+            transition: all 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: white;
+            border-color: #cde1f0;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.08);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #1e6b3e;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: #3f5a72;
+            line-height: 1.45;
+        }
+
+        /* about bot section */
+        .about-bot {
+            background: #ffffffd9;
+            border-radius: 48px;
+            margin: 30px 0 50px;
+            padding: 48px 40px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.05);
+            border: 1px solid #ebf2fa;
+        }
+
+        .about-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .about-text {
+            flex: 1.4;
+        }
+
+        .about-text h2 {
+            font-size: 1.9rem;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: #2d4a68;
+        }
+
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .badge {
+            background: #eef3fc;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .about-img {
+            flex: 0.8;
+            text-align: center;
+        }
+
+        .about-img i {
+            font-size: 8rem;
+            color: #1e6b3e;
+            opacity: 0.8;
+        }
+
+        /* платформы */
+        .platforms {
+            text-align: center;
+            margin: 40px 0 30px;
+        }
+
+        .platform-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        /* soon banner */
+        .soon-banner {
+            background: linear-gradient(110deg, #eef3e9, #e2eaf5);
+            border-radius: 40px;
+            padding: 48px 32px;
+            text-align: center;
+            margin: 40px 0 60px;
+            border: 1px solid #d0e2d4;
+        }
+
+        .soon-banner h3 {
+            font-size: 2rem;
+            margin-bottom: 14px;
+        }
+
+        .soon-banner p {
+            max-width: 500px;
+            margin: 0 auto 20px;
+            color: #2b5e3f;
+        }
+
+        .input-email {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .input-email input {
+            padding: 14px 20px;
+            border-radius: 60px;
+            border: 1px solid #cbdbe6;
+            width: 260px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .input-email button {
+            background: #1e6b3e;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 60px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-top: 1px solid #d4e2f0;
+            color: #6c8fae;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 720px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            .cta-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .btn {
+                justify-content: center;
+            }
+            .about-flex {
+                flex-direction: column;
+            }
+            .soon-banner h3 {
+                font-size: 1.7rem;
+            }
+            .container {
+                padding: 0 18px;
+            }
+        }
+
+        .glow {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .telegram-icon, .vk-icon {
+            font-size: 1.3rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="container">
+        <div class="hero-badge">
+            <i class="fas fa-charging-station"></i> официальный помощник EV-водителя
+        </div>
+        <h1>Заряжайся уверенно<br>в Вологде ⚡</h1>
+        <p class="hero-desc">
+            Бот-ассистент для владельцев электромобилей: ближайшие станции, совместимость с вашим авто, погода, прогноз занятости.
+        </p>
+        <div class="cta-group">
+            <a href="https://t.me/evhelper_vologda_bot" target="_blank" class="btn btn-tg">
+                <i class="fab fa-telegram-plane telegram-icon"></i> Telegram бот
+            </a>
+            <a href="https://vk.com/ev_helper_vologda" target="_blank" class="btn btn-vk">
+                <i class="fab fa-vk vk-icon"></i> VK Mini App
+            </a>
+            <a href="#soon" class="btn btn-outline">
+                <i class="fas fa-globe"></i> Сайт скоро
+            </a>
+        </div>
+        <div style="display: flex; gap: 12px; font-size: 0.8rem; color: #3f6b58;">
+            <span><i class="fas fa-map-marker-alt"></i> Вологда</span>
+            <span><i class="fas fa-plug"></i> CCS | CHAdeMO | Type 2</span>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="features">
+        <div class="section-title">
+            Умный помощник для вашего электромобиля
+        </div>
+        <div class="grid-3">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-location-dot"></i></div>
+                <h3>Ближайшие станции</h3>
+                <p>Отправьте геолокацию — бот найдёт 5 ближайших ЭЗС с учётом совместимости вашего автомобиля, мощностью и способом оплаты.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-car"></i></div>
+                <h3>Ваш профиль авто</h3>
+                <p>Добавьте марку электромобиля (Tesla, Nissan Leaf, VW ID.4 и др.) и бот покажет только совместимые зарядки — без лишнего.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Прогноз занятости + погода</h3>
+                <p>Узнайте загруженность станций в разное время и как погода влияет на скорость зарядки. Планируйте поездку грамотно.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="about-bot">
+        <div class="about-flex">
+            <div class="about-text">
+                <h2>🚀 Создан для водителей электрокаров</h2>
+                <p><strong>EV Helper</strong> — результат работы команды 5Б13-ЭС 21. Мы проанализировали инфраструктуру зарядных станций Вологды и добавили интеллектуальный поиск, поддержку двух платформ: Telegram и ВКонтакте.</p>
+                <div class="badge-list">
+                    <span class="badge"><i class="fas fa-bolt"></i> 15+ станций</span>
+                    <span class="badge"><i class="fas fa-microchip"></i> ИИ-прогноз</span>
+                    <span class="badge"><i class="fas fa-language"></i> Русский / English</span>
+                    <span class="badge"><i class="fas fa-map"></i> Маршруты Яндекс/Google</span>
+                </div>
+                <p>⚡ Функция "Мой автомобиль" — база данных из 1000+ моделей с определением типа разъёма (CCS, CHAdeMO, Type 2). Больше никакой несовместимости!</p>
+            </div>
+            <div class="about-img">
+                <i class="fas fa-charging-station"></i>
+                <div style="margin-top: 10px;"><i class="fas fa-robot" style="font-size: 3rem; color:#2787F5;"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="platforms">
+        <div class="section-title" style="margin-bottom: 20px;">Выберите свою платформу</div>
+        <p style="margin-bottom: 16px;">Бот доступен в двух мессенджерах — везде одинаковый функционал и база данных</p>
+        <div class="platform-buttons">
+            <a href="https://t.me/evhelper_vologda_bot" target="_blank" class="btn btn-tg" style="padding: 16px 32px;">
+                <i class="fab fa-telegram-plane"></i> Telegram бот
+            </a>
+            <a href="https://vk.com/ev_helper_vologda" target="_blank" class="btn btn-vk" style="padding: 16px 32px;">
+                <i class="fab fa-vk"></i> ВКонтакте бот
+            </a>
+        </div>
+        <div style="background: #eef2f8; border-radius: 28px; padding: 20px; margin-top: 20px; text-align: left;">
+            <i class="fas fa-comment-dots" style="color:#1e6b3e;"></i> <strong>Как начать?</strong><br>
+            • Перейдите в бота → /start → активируйте ключ у администратора (или получите демо-доступ)<br>
+            • Отправьте геолокацию через кнопку «+» (Telegram) или меню вложений (VK)<br>
+            • Добавьте автомобиль в профиле — и ищите только совместимые зарядки
+        </div>
+    </div>
+
+    <!-- Блок "скоро на сайте" -->
+    <div id="soon" class="soon-banner">
+        <i class="fas fa-globe" style="font-size: 3rem; color:#1e6b3e; margin-bottom: 12px; display: inline-block;"></i>
+        <h3>🌍 EV Helper — веб-версия скоро</h3>
+        <p>Интерактивная карта зарядных станций, личный кабинет, онлайн-бронирование и маршрутизация прямо в браузере. Без установки приложений.</p>
+        <div class="input-email">
+            <input type="email" id="emailInput" placeholder="Ваш e-mail для оповещения">
+            <button id="notifyBtn">Сообщить о запуске</button>
+        </div>
+        <p style="font-size: 0.8rem; margin-top: 18px;"><i class="fas fa-calendar-week"></i> Планируемый релиз: <strong>2 квартал 2026</strong></p>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2026 EV Helper — проект студентов 5Б13-ЭС 21 | Вологда, все права защищены</p>
+        <p style="margin-top: 8px;"><i class="fas fa-plug"></i> Делаем электротранспорт удобнее в Вологодской области</p>
+    </div>
+</footer>
+
+<script>
+    // Эффект для кнопки уведомления + простая имитация подписки
+    const notifyBtn = document.getElementById('notifyBtn');
+    const emailInput = document.getElementById('emailInput');
+
+    notifyBtn.addEventListener('click', () => {
+        let email = emailInput.value.trim();
+        if (!email) {
+            alert('Введите ваш email, чтобы получить новость о запуске сайта ⚡');
+            return;
+        }
+        if (!email.includes('@') || !email.includes('.')) {
+            alert('Пожалуйста, введите корректный email (например, name@domain.com)');
+            return;
+        }
+
+        // Имитация отправки (можно заменить на реальный endpoint)
+        fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email, source: 'ev_helper_landing' })
+        }).then(res => {
+            if (res.ok) {
+                alert(`✅ Спасибо, ${email}! Мы сообщим, когда EV Helper появится на сайте.`);
+                emailInput.value = '';
+            } else {
+                alert('❌ Техническая ошибка, но ваш интерес сохранён (можно написать разработчикам в боте).');
+            }
+        }).catch(() => {
+            alert('✨ Спасибо за интерес! Оповестим вас о запуске веб-сервиса.');
+            emailInput.value = '';
+        });
+    });
+
+    // Анимация появления карточек (просто для красоты)
+    const cards = document.querySelectorAll('.feature-card, .about-bot, .soon-banner');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0px)';
+            }
+        });
+    }, { threshold: 0.1 });
+    cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(18px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.5s ease';
+        observer.observe(card);
+    });
+
+    // кнопки копирования / ссылки открываются в новой вкладке
+    const allBtns = document.querySelectorAll('.btn');
+    allBtns.forEach(btn => {
+        if (btn.getAttribute('href') && (btn.getAttribute('href').startsWith('http'))) {
+            btn.setAttribute('target', '_blank');
+            btn.setAttribute('rel', 'noopener noreferrer');
+        }
+    });
+</script>
+
+<!-- Дополнительный блок с напоминанием о типах зарядок, чтобы повысить SEO и информировать -->
+<div class="container" style="margin-bottom: 40px;">
+    <div style="background: #ffffffcc; border-radius: 32px; padding: 24px 28px; border: 1px solid #e0eefa;">
+        <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between;">
+            <div>
+                <i class="fas fa-battery-full" style="font-size: 2.2rem; color:#1e6b3e;"></i>
+                <h4 style="margin: 8px 0 4px;">Поддержка всех типов разъемов</h4>
+                <p style="color:#2a577b;">CCS Combo, CHAdeMO, Type 2 (AC) — бот подскажет совместимость по вашему авто</p>
+            </div>
+            <div>
+                <i class="fas fa-cloud-sun" style="font-size: 2rem;"></i>
+                <span style="display: inline-block; margin-left: 8px;">⚡ Влияние погоды</span>
+            </div>
+            <div>
+                <i class="fas fa-charging-station"></i> 
+                <span style="font-weight: 500;">Актуальные данные о зарядках Вологды</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Декоративный элемент + скрытая структура для Open Graph -->
+<meta property="og:title" content="EV Helper — бот для зарядки электромобилей в Вологде">
+<meta property="og:description" content="Поиск ЭЗС, типы зарядок, прогноз занятости, погода, совместимость с вашим авто. Telegram и VK бот.">
+<meta property="og:image" content="https://placehold.co/800x400?text=EV+Helper">
+<meta property="og:url" content="https://evhelper-vologda.ru/">
+
+<!-- ссылки на ботов (для быстрого перехода) добавлены вручную -->
+</body>
+</html>
